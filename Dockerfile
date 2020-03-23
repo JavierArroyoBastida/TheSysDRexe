@@ -1,11 +1,9 @@
-FROM julia:1.1.0
+FROM julia:1.1.1
 
-ENV HOME /home/developer
+ENV HOME /home
 WORKDIR $HOME
-
-USER developer
-
-RUN julia -e "using Pkg; Pkg.add(\"HTTP\");Pkg.add(\"JSON\")"
 
 COPY runModel.ipynb $HOME
 COPY InputData.xlsx $HOME
+
+
