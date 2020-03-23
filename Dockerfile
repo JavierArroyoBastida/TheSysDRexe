@@ -10,8 +10,7 @@ RUN export uid=1000 gid=1000 && \
     chmod 0440 /etc/sudoers.d/developer && \
     chown ${uid}:${gid} -R /home/developer
 
-RUN apt-get pip && \
-	apt-get install -y 
+RUN apt-get install python-pip -y 
 
 USER developer
 
