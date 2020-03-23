@@ -12,6 +12,8 @@ RUN export uid=1000 gid=1000 && \
 
 USER developer
 
+RUN pip install --user --no-cache-dir notebook==5.*
+
 ENV HOME /home/developer
 WORKDIR $HOME
 
