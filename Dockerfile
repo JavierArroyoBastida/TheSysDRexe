@@ -38,7 +38,7 @@ RUN julia -e 'using Pkg; Pkg.REPLMode.pkgstr("add JuMP    		;precompile");using 
 RUN julia -e 'using Pkg; Pkg.REPLMode.pkgstr("add Ipopt	    	;precompile");using Ipopt'
 RUN julia -e 'using Pkg; Pkg.REPLMode.pkgstr("add Plots	    	;precompile");using Plots'
 
-COPY runModel.ipynb $HOME
+COPY Integrated_model.jl $HOME
 COPY InputData.xlsx $HOME
 
 
