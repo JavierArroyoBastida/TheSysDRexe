@@ -10,25 +10,19 @@ RUN export uid=1000 gid=1000 && \
     chmod 0440 /etc/sudoers.d/developer && \
     chown ${uid}:${gid} -R /home/developer
 
-# Install required packages
 RUN apt-get update && \
-    apt-get install -y \
-	python3.7 \
-    ipython \
-    python-matplotlib \
-    python-pip \
-    python-scipy 
+	apt-get install python-pip -y
 
 USER developer
 
-RUN pip install --upgrade pip
 RUN pip install --user --no-cache-dir notebook==5.*
-RUN pip install --user ipykernel==7.13.0
+RUN pip install --user ipykernel==4.7.0
 
 ENV HOME /home/developer
+WORKDIR $HOME
+
 ENV PATH $PATH:$HOME
 ENV PATH $PATH:$HOME/.local/bin
-WORKDIR $HOME
 
 RUN julia -e 'using Pkg; Pkg.REPLMode.pkgstr("add Dates     	;precompile");using Dates'
 RUN julia -e 'using Pkg; Pkg.REPLMode.pkgstr("add DataFrames	;precompile");using DataFrames'
@@ -46,5 +40,3 @@ RUN julia -e 'using Pkg; Pkg.REPLMode.pkgstr("add Plots	    	;precompile");using
 
 COPY Integrated_model.jl $HOME
 COPY InputData.xlsx $HOME
-
-
