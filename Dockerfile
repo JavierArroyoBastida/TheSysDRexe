@@ -22,7 +22,9 @@ RUN apt-get update && \
 
 RUN pip install --upgrade pip
 RUN pip install --user --no-cache-dir notebook==5.*
-RUN pip install --user ipykernel==4.7.0
+RUN pip install --user ipykernel
+
+ENV PATH $PATH:/root/.local/bin
 
 USER developer
 
