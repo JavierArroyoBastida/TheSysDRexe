@@ -10,13 +10,21 @@ RUN export uid=1000 gid=1000 && \
     chmod 0440 /etc/sudoers.d/developer && \
     chown ${uid}:${gid} -R /home/developer
 
+# Install required packages
 RUN apt-get update && \
-	apt-get install python-pip -y
+    apt-get install -y \
+    ipython=5.5.0-1 \
+    python-lxml \
+    python-matplotlib \
+    python-nose \
+    python-pip=9.0.* \
+    python-scipy 
 
-USER developer
-
+RUN pip install --upgrade pip
 RUN pip install --user --no-cache-dir notebook==5.*
 RUN pip install --user ipykernel==4.7.0
+
+USER developer
 
 ENV HOME /home/developer
 WORKDIR $HOME
