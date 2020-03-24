@@ -16,9 +16,13 @@ RUN apt-get update && \
 USER developer
 
 RUN pip install --user --no-cache-dir notebook==5.*
+RUN pip install --user ipykernel==4.7.0
 
 ENV HOME /home/developer
 WORKDIR $HOME
+
+ENV PATH $PATH:$HOME
+ENV PATH $PATH:$HOME/.local/bin
 
 COPY runModel.ipynb $HOME
 COPY InputData.xlsx $HOME
