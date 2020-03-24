@@ -530,7 +530,7 @@ for day_start = simulTimeVec
 
     # Initialize optimization problem
     # integratedModel = Model(with_optimizer(Ipopt.Optimizer,OutputFlag=0))
-    integratedModel = Model(optimizer_with_attributes(Ipopt.Optimizer))
+    integratedModel = Model(optimizer_with_attributes(Ipopt.Optimizer, "print_level"=>0))
 
 
     # Indexing parameters
@@ -730,12 +730,10 @@ for day_start = simulTimeVec
    status = JuMP.termination_status(integratedModel)
 
    if status == MOI.LOCALLY_SOLVED
-           # println("...Integrated model was solved to optimality...")
+           println("     ",status)
    else
            error("ERROR: Integrated model for day $day_start was not solved to optimality")
    end
-
-   println("     ",status)
 
    #-------------------------------------------------------------------------------
    # Save optimization results
