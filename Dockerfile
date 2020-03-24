@@ -13,11 +13,11 @@ RUN export uid=1000 gid=1000 && \
 # Install required packages
 RUN apt-get update && \
     apt-get install -y \
-    ipython=5.5.0-1 \
+    ipython \
     python-lxml \
     python-matplotlib \
     python-nose \
-    python-pip=9.0.* \
+    python-pip* \
     python-scipy 
 
 RUN pip install --upgrade pip
