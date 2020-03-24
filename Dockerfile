@@ -11,7 +11,7 @@ RUN export uid=1000 gid=1000 && \
     chown ${uid}:${gid} -R /home/developer
 
 RUN apt-get update && \
-	apt-get install python-pip
+	apt-get install python-pip -y
 
 USER developer
 
