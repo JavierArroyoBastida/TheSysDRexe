@@ -13,26 +13,22 @@ RUN export uid=1000 gid=1000 && \
 # Install required packages
 RUN apt-get update && \
     apt-get install -y \
+	python3.7 \
     ipython \
-    python-lxml \
     python-matplotlib \
-    python-nose \
-    python-pip* \
+    python-pip \
     python-scipy 
-
-RUN pip install --upgrade pip
-RUN pip install --user --no-cache-dir notebook==5.*
-RUN pip install --user ipykernel
-
-ENV PATH $PATH:/root/.local/bin
 
 USER developer
 
-ENV HOME /home/developer
-WORKDIR $HOME
+RUN pip install --upgrade pip
+RUN pip install --user --no-cache-dir notebook==5.*
+RUN pip install --user ipykernel==7.13.0
 
+ENV HOME /home/developer
 ENV PATH $PATH:$HOME
 ENV PATH $PATH:$HOME/.local/bin
+WORKDIR $HOME
 
 COPY runModel.ipynb $HOME
 COPY InputData.xlsx $HOME
