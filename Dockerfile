@@ -30,7 +30,21 @@ ENV PATH $PATH:$HOME
 ENV PATH $PATH:$HOME/.local/bin
 WORKDIR $HOME
 
-COPY runModel.ipynb $HOME
+RUN julia -e 'using Pkg; Pkg.REPLMode.pkgstr("add Dates     	;precompile");using Dates'
+RUN julia -e 'using Pkg; Pkg.REPLMode.pkgstr("add DataFrames	;precompile");using DataFrames'
+RUN julia -e 'using Pkg; Pkg.REPLMode.pkgstr("add XLSX       	;precompile");using XLSX'
+RUN julia -e 'using Pkg; Pkg.REPLMode.pkgstr("add CSV        	;precompile");using CSV'
+RUN julia -e 'using Pkg; Pkg.REPLMode.pkgstr("add Missings   	;precompile");using Missings'
+RUN julia -e 'using Pkg; Pkg.REPLMode.pkgstr("add ControlSystems;precompile");using ControlSystems'
+RUN julia -e 'using Pkg; Pkg.REPLMode.pkgstr("add MAT      		;precompile");using MAT'
+RUN julia -e 'using Pkg; Pkg.REPLMode.pkgstr("add Statistics    ;precompile");using Statistics'
+RUN julia -e 'using Pkg; Pkg.REPLMode.pkgstr("add LinearAlgebra ;precompile");using LinearAlgebra'
+RUN julia -e 'using Pkg; Pkg.REPLMode.pkgstr("add Distributions ;precompile");using Distributions'
+RUN julia -e 'using Pkg; Pkg.REPLMode.pkgstr("add JuMP    		;precompile");using JuMP'
+RUN julia -e 'using Pkg; Pkg.REPLMode.pkgstr("add Ipopt	    	;precompile");using Ipopt'
+RUN julia -e 'using Pkg; Pkg.REPLMode.pkgstr("add Plots	    	;precompile");using Plots'
+
+COPY Integrated_model.jl $HOME
 COPY InputData.xlsx $HOME
 
 
